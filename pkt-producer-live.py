@@ -11,7 +11,6 @@ producer = KafkaProducer(bootstrap_servers=['localhost:9092'],
 print("Created Producer\n")
 
 cap = pcapy.open_live("\\Device\\NPF_{92A73785-3D32-4F12-8559-5725D685BED2}", 65536, 1, 0)
-count = 1
 
 print("Started Capture\n")
 
@@ -25,9 +24,9 @@ while True:
     dstIp = socket.inet_ntoa(ip_hdr[2])
     response = DbIpCity.get(srcIp, api_key='free')
 
-    msg = str(response.country) + ', ' + str(response.city) + ', ' + str(response.ip_address)
-    count += 1
-    if len(str(response.country)) > 1 and str(response.city) != 'None' :
-        print("" + str(response.country) + ', ' + str(response.city) + ', ' + str(response.ip_address))
+    msg = str(response.country) + ', ' + str(response.city) + ', ' + str(response.latitude) + ', ' + str(response.longitude) + ', ' + str(response.ip_address)
+
+    if len(str(response.country)) > 1 and str(response.city) != 'None':
+        print(str(response.country) + ', ' + str(response.city) + ', ' + str(response.latitude) + ', ' + str(response.longitude) + ', ' + str(response.ip_address))
         producer.send('pkttest', msg)
     sleep(0.5)

@@ -32,7 +32,7 @@ pkt_df = spark \
 
 pkt_df1 = pkt_df.selectExpr("CAST(value AS STRING)", "timestamp")
 
-pkt_schema_string = "Count STRING, src_mac STRING, dst_mac STRING"
+pkt_schema_string = "country STRING, city STRING, latitude STRING, longitude STRING, src_ip STRING"
 
 pkt_df2 = pkt_df1 \
     .select(from_csv(col("value"), pkt_schema_string) \
