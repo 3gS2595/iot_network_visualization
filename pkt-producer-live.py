@@ -18,7 +18,6 @@ while True:
     (header, payload) = cap.next()
 
     ipHeader = payload[14:34]
-    # 12s represents Identification, Time to Live, Protocol | Flags, Fragment Offset, Header Checksum
     ip_hdr = unpack("!12s4s4s", ipHeader)
     srcIp = socket.inet_ntoa(ip_hdr[1])
     dstIp = socket.inet_ntoa(ip_hdr[2])
